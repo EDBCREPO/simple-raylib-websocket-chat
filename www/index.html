@@ -1,0 +1,32 @@
+<!DOCTYPE html> <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.12/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.12/dist/js/uikit-icons.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.12/dist/css/uikit.min.css" />
+
+        <script src="main.js"></script>
+        <title>WebSockets</title>
+    </head>
+
+    <body uk-viewport-height="expand" class="uk-padding uk-flex uk-flex-column" 
+          style="gap: 10px; overflow: hidden;">
+
+        <h1>Hello WebSockets</h1>
+
+        <div id="messages" class="uk-height-large uk-padding-small"
+             style="border: 1px solid #ccc; overflow: auto;" >
+        </div>
+
+        <div class="uk-flex uk-child-with-1-1">
+            <input type="text" id="message" class="uk-width-1-1 uk-input" placeholder="Message..." autocomplete="off">
+            <button id="send" class="uk-button uk-button-secondary">Send</button>
+        </div>
+
+    </body>
+
+</html>
