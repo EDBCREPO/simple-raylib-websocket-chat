@@ -1,6 +1,6 @@
 # Websocket - raylib
 
-this is a simple implementation of a real-time chat using c++, raylib and nodepp
+This is a simple implementation of a real-time chat using c++, raylib and nodepp
 
 # Dependencies
 ```bash
@@ -9,6 +9,7 @@ this is a simple implementation of a real-time chat using c++, raylib and nodepp
 ```
 
 # Preview
+[Imagen](https://github.com/user-attachments/assets/609e7346-0be3-4875-a23b-bd9c8ad5ae18)
 
 # Build & Run
 ```bash
