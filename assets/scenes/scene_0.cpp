@@ -18,11 +18,17 @@ namespace rl { namespace scene {
 
     /*.........................................................................*/
 
-        obj->client = ws::client( "ws://localhost:8000" );
+        ws::client( "ws://localhost:8000" ).onConnect([=]( ws_t cli ){
+            
+            console::log( "Connected" ); obj->client = cli;
+            
+            cli.onClose([=](){ rl::Close(); }); 
 
-        obj->client.onClose([=](){ rl::Close(); }); 
-        obj->client.onOpen([=](){ console::log( "Connected" ); });
-        obj->client.onData([=]( string_t data ){ obj->MessageList.push( data ); });
+            cli.onData([=]( string_t data ){ 
+                obj->MessageList.push( data ); 
+            });
+
+        });
 
     /*.........................................................................*/
 
