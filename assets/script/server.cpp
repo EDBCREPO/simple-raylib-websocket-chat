@@ -1,46 +1,22 @@
 #pragma once
 
 #include <nodepp/nodepp.h>
+#include <express/http.h>
 #include <nodepp/path.h>
 #include <nodepp/fs.h>
 #include <nodepp/ws.h>
 
 namespace rl { namespace game {
 
-    queue_t<ws_t> list;
-    
-    tcp_t server() {
+    queue_t<ws_t> list; void server() {
 
-        auto server = http::server([=]( http_t cli ){ 
+        auto app = express::http::add();
+        auto srv = app.listen( "localhost", 8000, [=]( socket_t ){
+            console::log("server started at http://localhost:8000");
+        }); ws::server( srv );
 
-            string_t dir = "www/index.html";
-
-            if( cli.path != "/" )
-              { dir = path::join( "www", cli.path ); }
-
-            if( !fs::exists_file(dir) ){
-                cli.write_header( 404, header_t({ 
-                    { "content-type", "text/plain" }
-                }) );
-                cli.write("Oops: 404 Error"); 
-                cli.close(); return;
-            }
-
-            auto str = fs::readable( dir );
-
-            cli.write_header( 200, header_t({
-                { "Content-Length", string::to_string(str.size()) },
-            //  { "Cache-Control", "public, max-age=3600" },
-                { "Content-Type",   path::mimetype(dir) }
-            }));
-
-            stream::pipe( str, cli );
-
-        });
-
-        ws::server( server );
-
-        server.onConnect( [=]( ws_t cli ){
+        app.USE( express::http::file( "./www" ) );
+        srv.onConnect( [=]( ws_t cli ){
 
             list.push( cli ); auto ID = list.last();
 
@@ -56,12 +32,6 @@ namespace rl { namespace game {
             console::log( "Connected" );
 
         });
-
-        server.listen( "localhost", 8000, [=]( socket_t server ){
-            console::log("server started at http://localhost:8000");
-        });
-
-        return server;
 
     }
 

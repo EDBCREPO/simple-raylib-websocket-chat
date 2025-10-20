@@ -14,7 +14,7 @@ void onMain() {
 
     } else {
 
-        rl::Init( { 300, 600 }, 60, "Cursed Luna" );
+        rl::Init( { 300, 600 }, 60, "Raylib Chat" );
 
         rl::AppendScene( rl::scene::scene_0 );
 
